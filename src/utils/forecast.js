@@ -8,13 +8,9 @@ const forecast = (lat, lon, callback) =>{
         }else if (body.error) {
             console.log('Unable to find location. Try another search.')
         }else{
-            callback(undefined, 'It is currently '+ body.current.temperature + ' degrees out. It feels like ' + body.current.feelslike)
+            callback(undefined, 'It is currently '+ body.current.temperature + ' degrees out. It feels like ' + body.current.feelslike + '. Humidity is: ' + body.current.humidity + '%')
         }
     })
 }
 
 module.exports = forecast
-
-//         const parsed = JSON.parse(response.body);
-//         const currentW = parsed.current
-//         console.log('It is currently', currentW.temperature, 'degrees out. It feels like', currentW.feelslike)
