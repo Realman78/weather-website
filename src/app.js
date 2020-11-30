@@ -21,14 +21,14 @@ app.use(express.static(publicDirPath))
 app.get('', (req, res)=>{
     res.render('index',{
         title: 'Weather app',
-        name: 'Marin Dedic'
+        name: 'Marin'
     })
 })
 
 app.get('/about', (req, res)=>{
     res.render('about', {
         title: 'About page',
-        name: 'Marin big D About'
+        name: 'Marin'
     })
 })
 
@@ -36,7 +36,7 @@ app.get('/help', (req, res)=>{
     res.render('help', {
         msg: 'you came to the HELP page',
         title: 'Help',
-        name: 'Marin D helper'
+        name: 'Marin'
     })
 })
 
