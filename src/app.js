@@ -4,6 +4,7 @@ const hbs = require('hbs')
 const { query } = require('express')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
+const reverseGeocode = require('./utils/reverse-geocode')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -63,6 +64,26 @@ app.get('/weather', (req,res) => {
             })
     })
     })
+})
+
+app.get('/weather/geolocation', (req,res)=>{
+    if (!req.query.latitude || !req.query.longitude){
+        return res.send({
+            error: 'something is extremely wrong'
+        })
+    }
+    reverseGeocode(req.query.latitude, req.query.longitude, (geoError, geoData)=>{
+        forecast(req.query.latitude, req.query.longitude, (error, data)=>{
+        if(error){
+            return res.send({error})
+        }
+        res.send({
+            forecast: data,
+            place_name: geoData
+        })
+    })
+    })
+    
 })
 
 app.get('/products', (req,res)=>{
